@@ -1,13 +1,13 @@
 # Esame di Ingegneria del Software - Progetto MentCare
-##Studente: Danieli Giovanni - VR
+## Studente: Danieli Giovanni - VR
 
 
 ![Logo of Mentcare](./readmeImages/logo_small.png)
 
 #
-#Sommario
-##[1. Requisiti](#requisiti)
-##[2. Scenari](#scenari)
+# Sommario
+## [1. Requisiti](#requisiti)
+## [2. Scenari](#scenari)
 
 
 ## Requisiti
