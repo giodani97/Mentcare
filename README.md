@@ -9,7 +9,8 @@
 [1. Requisiti](#requisiti)\
 [2. Modulo scelto](#modulo-scelto)\
 [3. Scenari](#scenari)\
-[4. Use case diagram](#use-case-diagram)
+[4. Use case diagram](#use-case-diagram)\
+[5. Class diagram](#class-diagram)
 
 #
 ## Requisiti
@@ -69,7 +70,12 @@ Una volta cliccato sul primo verranno portati alla pagina "Cartella clinica di M
 Una volta compilato il form potrà salvare la prescrizione cliccando su "Inserisci" oppure annullarla cliccando su "Annulla". In entrambi i casi verrà reindirizzato alla cartella clinica del paziente.
 **Stato del sistema a scenario completato:** Il medico è autenticato e si trova sulla pagina "Cartella clinica di Mario Rossi" (/cartella-clinica/idpaziente).
 
-### 5. Scrivere altro scenario
+### 5. Inserire una visita
 
 #
 ## Use case diagram
+![Use case Medico](./readmeImages/Use%20Case%20Medico.svg)
+
+#
+## Class diagram
+
