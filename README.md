@@ -8,7 +8,8 @@
 ## Sommario
 [1. Requisiti](#requisiti)\
 [2. Modulo scelto](#modulo-scelto)\
-[3. Scenari](#scenari)
+[3. Scenari](#scenari)\
+[4. Use case diagram](#use-case-diagram)
 
 #
 ## Requisiti
@@ -57,11 +58,18 @@ Come richiesto dal Professore verrà sviluppato un singolo componente del proget
 ### 3. Aggiornare la cartella clinica di un paziente
 **Assunzione iniziale:** Un medico deve poter aggiornare la cartella clinica di un paziente. Il medico deve essersi già autenticato al sistema attraverso un browser e trovarsi sulla home page (/).\
 **Normalità:** Il medico deve cliccare sul link "Visualizza la lista dei pazienti" dalla home page (/). Verrà reindirizzato alla pagina "Lista pazienti" (/lista-pazienti) dove troverà una tabella con tutti i pazienti in cura presso il sistema di cliniche. Una volta individuato il paziente la cui cartella clinica è da modificare, scorrendo sulla riga vedrà due bottoni: uno Blu con la scritta ("Visualizza cartella") e uno rosso con la scritta ("Modifica cartella"). 
-Una volta cliccato su quest'ultimo verranno portati alla pagina "Modifica cartella clinica Mario Rossi" (/modifica-cartella/mario-rossi) (Mario Rossi viene utilizzato come esempio). Qui potrà modificare i vari campi disponibili. Una volta completate le modifiche troverà due bottoni: "Salva modifiche" oppure "Annulla".
+Una volta cliccato su quest'ultimo verranno portati alla pagina "Modifica cartella clinica Mario Rossi" (/modifica-cartella/idpaziente) (Mario Rossi viene utilizzato come esempio). Qui potrà modificare i vari campi disponibili. Una volta completate le modifiche troverà due bottoni: "Salva modifiche" oppure "Annulla".
 Il primo salverà le modifiche alla cartella clinica e reindirizzerà il medico alla pagina "Lista pazienti" (/lista-pazienti). Il secondo invece ignorerà le modifiche e reindirizzerà il medico alla pagina "Lista pazienti" (/lista-pazienti).\
 **Stato del sistema a scenario completato:** Il medico è autenticato e si trova sulla pagina "Lista pazienti" (/lista-pazienti).
 
 ### 4. Prescrivere un farmaco
 **Assunzione iniziale:** Un medico deve prescrivere un farmaco ad un paziente. Il medico deve essersi già autenticato al sistema attraverso un browser e trovarsi sulla home page (/).\
-**Normalità:** Il medico deve cliccare sul link "Visualizza la lista dei pazienti" dalla home page (/). Verrà reindirizzato alla pagina "Lista pazienti" (/lista-pazienti) dove troverà una tabella con tutti i pazienti in cura presso il sistema di cliniche.\
-**Stato del sistema a scenario completato:** Il medico è autenticato e si trova sulla pagina "Lista pazienti" (/lista-pazienti).
+**Normalità:** Il medico deve cliccare sul link "Visualizza la lista dei pazienti" dalla home page (/). Verrà reindirizzato alla pagina "Lista pazienti" (/lista-pazienti) dove troverà una tabella con tutti i pazienti in cura presso il sistema di cliniche.Una volta individuato il paziente la cui cartella clinica è da modificare, scorrendo sulla riga vedrà due bottoni: uno Blu con la scritta ("Visualizza cartella") e uno rosso con la scritta ("Modifica cartella").
+Una volta cliccato sul primo verranno portati alla pagina "Cartella clinica di Mario Rossi" (/cartella-clinica/idpaziente) (Mario Rossi viene utilizzato come esempio) dove il medico visualizzerà la cartella clinica del paziente selezionato. Oltre alla cartella clinica ci saranno due bottoni: "Nuova visita" e "Nuova prescrizione". Cliccato il pulsante "Nuova prescrizione", il medico verrà portato alla pagina "Nuova prescrizione" (/nuova-prescrizione/idpaziente) dove compilerà un form per una nuova prescrizione. 
+Una volta compilato il form potrà salvare la prescrizione cliccando su "Inserisci" oppure annullarla cliccando su "Annulla". In entrambi i casi verrà reindirizzato alla cartella clinica del paziente.
+**Stato del sistema a scenario completato:** Il medico è autenticato e si trova sulla pagina "Cartella clinica di Mario Rossi" (/cartella-clinica/idpaziente).
+
+### 5. Scrivere altro scenario
+
+#
+## Use case diagram
