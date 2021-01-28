@@ -44,3 +44,24 @@ Gli utenti del sistema si dividono in due gruppi:
 Come richiesto dal Professore verrà sviluppato un singolo componente del progetto Mentcare, ovvero verrà sviluppato il modulo riguardo al medico.
 
 ## Scenari 
+### 1. Visualizzare la lista dei pazienti
+**Assunzione iniziale:** Un medico deve visualizzare la lista dei pazienti in cura. Il medico deve essersi già autenticato al sistema attraverso un browser e trovarsi sulla home page (/).\
+**Normalità:** Il medico deve cliccare sul link "Visualizza la lista dei pazienti" dalla home page (/). Verrà reindirizzato alla pagina "Lista pazienti" (/lista-pazienti) dove troverà una tabella con tutti i pazienti in cura presso il sistema di cliniche.\
+**Stato del sistema a scenario completato:** Il medico è autenticato e si trova sulla pagina "Lista pazienti" (/lista-pazienti).
+
+### 2. Visualizzare i prossimi appuntamenti
+**Assunzione iniziale:** Un medico deve visualizzare i prossimi appuntamenti con i pazienti. Il medico deve essersi già autenticato al sistema attraverso un browser e trovarsi sulla home page (/).\
+**Normalità:** Il medico deve cliccare sul link "La mia agenda" dalla home page (/). Verrà reindirizzato alla pagina "La mia agenda" (/la-mia-agenda) dove sarà presente una tabella con i suoi prossimi appuntamenti. Ogni riga della tabella conterrà la data e l'ora della visita, nome e cognome del paziente (sarà un link che porta alla cartella clinica del paziente) accompagnato da un warning sign (&#x26A0;) se questo presenta comportamenti pericolosi.\
+**Stato del sistema a scenario completato:** Il medico è autenticato e si trova sulla pagina "La mia agenda" (/la-mia-agenda).
+
+### 3. Aggiornare la cartella clinica di un paziente
+**Assunzione iniziale:** Un medico deve poter aggiornare la cartella clinica di un paziente. Il medico deve essersi già autenticato al sistema attraverso un browser e trovarsi sulla home page (/).\
+**Normalità:** Il medico deve cliccare sul link "Visualizza la lista dei pazienti" dalla home page (/). Verrà reindirizzato alla pagina "Lista pazienti" (/lista-pazienti) dove troverà una tabella con tutti i pazienti in cura presso il sistema di cliniche. Una volta individuato il paziente la cui cartella clinica è da modificare, scorrendo sulla riga vedrà due bottoni: uno Blu con la scritta ("Visualizza cartella") e uno rosso con la scritta ("Modifica cartella"). 
+Una volta cliccato su quest'ultimo verranno portati alla pagina "Modifica cartella clinica Mario Rossi" (/modifica-cartella/mario-rossi) (Mario Rossi viene utilizzato come esempio). Qui potrà modificare i vari campi disponibili. Una volta completate le modifiche troverà due bottoni: "Salva modifiche" oppure "Annulla".
+Il primo salverà le modifiche alla cartella clinica e reindirizzerà il medico alla pagina "Lista pazienti" (/lista-pazienti). Il secondo invece ignorerà le modifiche e reindirizzerà il medico alla pagina "Lista pazienti" (/lista-pazienti).\
+**Stato del sistema a scenario completato:** Il medico è autenticato e si trova sulla pagina "Lista pazienti" (/lista-pazienti).
+
+### 4. Prescrivere un farmaco
+**Assunzione iniziale:** Un medico deve prescrivere un farmaco ad un paziente. Il medico deve essersi già autenticato al sistema attraverso un browser e trovarsi sulla home page (/).\
+**Normalità:** Il medico deve cliccare sul link "Visualizza la lista dei pazienti" dalla home page (/). Verrà reindirizzato alla pagina "Lista pazienti" (/lista-pazienti) dove troverà una tabella con tutti i pazienti in cura presso il sistema di cliniche.\
+**Stato del sistema a scenario completato:** Il medico è autenticato e si trova sulla pagina "Lista pazienti" (/lista-pazienti).
