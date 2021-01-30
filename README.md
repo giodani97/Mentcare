@@ -11,6 +11,8 @@
 [3. Scenari](#scenari)\
 [4. Use case diagram](#use-case-diagram)\
 [5. Class diagram](#class-diagram)
+[6. Sequence diagram](#sequence-diagram)
+[7. Activity diagram](#activity-diagram)
 
 #
 ## Requisiti
@@ -114,4 +116,12 @@ Rossi" (/cartella-clinica/idpaziente).
 
 #
 ## Class diagram
+![Class Diagram](./readmeImages/ClassDiagram.svg)
 
+#
+## Sequence Diagram
+![Sequence Diagram](./readmeImages/SequenceDiagram.svg)
+
+#
+##
+![Activity Diagram](./readmeImages/ActivityDiagram.svg)
