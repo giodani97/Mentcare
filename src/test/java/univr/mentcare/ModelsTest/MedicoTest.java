@@ -1,10 +1,9 @@
 package univr.mentcare.ModelsTest;
 
 import org.junit.Before;
+import org.junit.Test;
 import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import univr.mentcare.Models.Medico;
 
 
@@ -12,14 +11,25 @@ public class MedicoTest {
 
     private Medico medico;
 
-    @BeforeEach
+    @Before
     public void creaMedico(){
         medico = new Medico("Mario", "Rossi", "VR001");
     }
 
     @Test
-    public void testGetID(){
+    public void getId(){
+        assertEquals(0, medico.getId());
+    }
+
+    @Test
+    public void getIscrOrdineMediciTest(){
         assertEquals("VR001", medico.getIscrOrdineMedici());
+    }
+
+    @Test
+    public void setIscrOrdiniMediciTest(){
+        medico.setIscrOrdineMedici("VI001");
+        assertEquals("VI001", medico.getIscrOrdineMedici());
     }
 
     @Test

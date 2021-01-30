@@ -8,12 +8,11 @@ public class Medico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
     private String nome;
     private String cognome;
     private String iscrOrdineMedici;
 
-    protected Medico(){};
 
     public Medico(String nome, String cognome, String iscrOrdineMedici) {
         this.nome = nome;
@@ -21,7 +20,7 @@ public class Medico {
         this.iscrOrdineMedici = iscrOrdineMedici;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 

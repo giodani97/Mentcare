@@ -128,8 +128,4 @@ public class Paziente {
         this.autosufficiente = autosufficiente;
     }
 
-    public void getCartellaClinica() {
-        // TODO implement here
-    }
-
 }

@@ -1,10 +1,11 @@
 package univr.mentcare.ModelsTest;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
+
+import org.junit.Before;
+import org.junit.Test;
 import univr.mentcare.Models.Paziente;
 
-import java.text.DateFormat;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -16,7 +17,7 @@ public class PazienteTest {
 
     private Paziente paziente;
 
-    @BeforeEach
+    @Before
     public void creaPazienteTest() throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date datanascita = formatter.parse("01/01/1980");
@@ -29,6 +30,11 @@ public class PazienteTest {
                 "01234567890",
                 false,
                 true);
+    }
+
+    @Test
+    public void getIdTest(){
+        assertEquals(0, paziente.getId());
     }
 
     @Test
@@ -124,31 +130,36 @@ public class PazienteTest {
     }
 
     @Test
-    public void getDataDiagnosi() {
+    public void getDataDiagnosiTest() {
+        assertNull(paziente.getDataDiagnosi());
     }
 
     @Test
-    public void setDataDiagnosi() {
+    public void setDataDiagnosiTest() {
+        paziente.setDataDiagnosi(Calendar.getInstance().getTime());
+        assertEquals(Calendar.getInstance().getTime(), paziente.getDataDiagnosi());
     }
 
     @Test
-    public void isPericoloso() {
+    public void isPericolosoTest() {
+        assertFalse(paziente.isPericoloso());
     }
 
     @Test
-    public void setPericoloso() {
+    public void setPericolosoTest() {
+        paziente.setPericoloso(true);
+        assertTrue(paziente.isPericoloso());
     }
 
     @Test
-    public void isAutosufficiente() {
+    public void isAutosufficienteTest() {
+        assertTrue(paziente.isAutosufficiente());
     }
 
     @Test
-    public void setAutosufficiente() {
-    }
-
-    @Test
-    public void getCartellaClinica() {
+    public void setAutosufficienteTest() {
+        paziente.setAutosufficiente(false);
+        assertFalse(paziente.isAutosufficiente());
     }
 
 
