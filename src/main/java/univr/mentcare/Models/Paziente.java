@@ -1,15 +1,14 @@
 package univr.mentcare.Models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 
-
+@Entity
 public class Paziente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true, name = "PAZIENTE_ID")
     private long id;
     private String cognome;
     private String nome;
@@ -22,6 +21,8 @@ public class Paziente {
     private Date dataDiagnosi;
     private boolean pericoloso;
     private boolean autosufficiente;
+
+    protected Paziente(){};
 
     public Paziente(String cognome, String nome, Date dataDiNascita, String comuneNascita, String provinciaNascita, String nazionalita, String nTelefono, boolean pericoloso, boolean autosufficiente) {
         this.cognome = cognome;

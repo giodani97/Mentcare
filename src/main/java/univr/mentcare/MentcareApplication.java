@@ -1,4 +1,4 @@
-package univr.mentcare.Controller;
+package univr.mentcare;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

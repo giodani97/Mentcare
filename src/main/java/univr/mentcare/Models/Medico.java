@@ -1,18 +1,18 @@
 package univr.mentcare.Models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
 public class Medico {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true, name = "MEDICO_ID")
     private long id;
     private String nome;
     private String cognome;
     private String iscrOrdineMedici;
 
+    protected Medico(){}
 
     public Medico(String nome, String cognome, String iscrOrdineMedici) {
         this.nome = nome;

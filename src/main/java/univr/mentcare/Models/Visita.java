@@ -1,18 +1,24 @@
 package univr.mentcare.Models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
 public class Visita {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true, name = "VISITA_ID")
     private long idVisita;
+    @ManyToOne(targetEntity = Medico.class)
+    @JoinColumn(name = "MEDICO_ID")
     private Medico medico;
+    @ManyToOne(targetEntity = Paziente.class)
+    @JoinColumn(name = "PAZIENTE_ID")
     private Paziente paziente;
     private Date dataVisita;
     private String osservazioni;
+
+    protected Visita(){};
 
     public Visita(Medico medico, Paziente paziente, Date dataVisita) {
         this.medico = medico;

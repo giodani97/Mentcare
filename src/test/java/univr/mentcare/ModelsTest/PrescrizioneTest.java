@@ -3,6 +3,8 @@ package univr.mentcare.ModelsTest;
 import org.junit.Before;
 import org.junit.Test;
 import univr.mentcare.Models.Farmaco;
+import univr.mentcare.Models.Medico;
+import univr.mentcare.Models.Paziente;
 import univr.mentcare.Models.Prescrizione;
 
 import java.text.ParseException;
@@ -15,10 +17,26 @@ import static org.junit.Assert.*;
 public class PrescrizioneTest {
 
     private Prescrizione prescrizione;
+    private Medico medico;
+    private Farmaco farmaco;
+    private Paziente paziente;
 
     @Before
     public void setUp() throws Exception {
-        prescrizione = new Prescrizione(new Farmaco("Haldol", "aloperidolo"), Calendar.getInstance().getTime(), "50mg");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date datanascita = formatter.parse("01/01/1980");
+        farmaco = new Farmaco("Haldol", "aloperidolo");
+        medico = new Medico("Mario", "Rossi", "VR001");
+        paziente = new Paziente("Bianchi",
+                "Neri",
+                datanascita,
+                "Valdagno",
+                "Vicenza",
+                "Italia",
+                "01234567890",
+                false,
+                true);
+        prescrizione = new Prescrizione(farmaco, Calendar.getInstance().getTime(), "50mg", medico, paziente);
     }
 
     @Test
@@ -60,5 +78,37 @@ public class PrescrizioneTest {
         prescrizione.setFarmaco(nuovoFarmaco);
         assertEquals(nuovoFarmaco.getPrincipioAttivo(), prescrizione.getFarmaco().getPrincipioAttivo());
         assertEquals(nuovoFarmaco.getNomeCommerciale(), prescrizione.getFarmaco().getNomeCommerciale());
+    }
+
+    @Test
+    public void getMedicoPrescrittore() {
+        assertEquals(medico.getIscrOrdineMedici(), prescrizione.getMedicoPrescrittore().getIscrOrdineMedici());
+    }
+
+    @Test
+    public void setMedicoPrescrittore() {
+        Medico nuovoMedico = new Medico("Lugi", "Mario", "VI111");
+        prescrizione.setMedicoPrescrittore(nuovoMedico);
+        assertEquals(nuovoMedico.getIscrOrdineMedici(), prescrizione.getMedicoPrescrittore().getIscrOrdineMedici());
+    }
+
+    @Test
+    public void getPaziente(){
+        assertEquals(paziente.getCognome(), prescrizione.getPaziente().getCognome());
+    }
+
+    @Test
+    public void setPaziente(){
+        Paziente nuovoPaziente = new Paziente("Neri",
+                "Rossi",
+                Calendar.getInstance().getTime(),
+                "Verona",
+                "Verona",
+                "Italia",
+                "09876543210",
+                true,
+                false);
+        prescrizione.setPaziente(nuovoPaziente);
+        assertEquals(nuovoPaziente.getCognome(), prescrizione.getPaziente().getCognome());
     }
 }

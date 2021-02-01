@@ -1,23 +1,35 @@
 package univr.mentcare.Models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
 public class Prescrizione {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true, name = "PRESCRIZIONE_ID")
     private long idPrescrizione;
+    @ManyToOne(targetEntity = Medico.class)
+    @JoinColumn(name = "MEDICO_ID")
+    private Medico medicoPrescrittore;
+    @ManyToOne(targetEntity = Farmaco.class)
+    @JoinColumn(name = "FARMACO_ID")
     private Farmaco farmaco;
+    @ManyToOne(targetEntity = Paziente.class)
+    @JoinColumn(name = "PAZIENTE_ID")
+    private Paziente paziente;
     private Date dataPrescrizione;
     private String dosaggio;
 
-    public Prescrizione(Farmaco farmaco, Date dataPrescrizione, String dosaggio) {
+    protected Prescrizione(){}
+
+    public Prescrizione(Farmaco farmaco, Date dataPrescrizione, String dosaggio, Medico medicoPrescrittore, Paziente paziente) {
         this.farmaco = farmaco;
         this.dataPrescrizione = dataPrescrizione;
         this.dosaggio = dosaggio;
+        this.medicoPrescrittore = medicoPrescrittore;
+        this.paziente = paziente;
     }
 
     public long getIdPrescrizione() {
@@ -46,5 +58,21 @@ public class Prescrizione {
 
     public void setFarmaco(Farmaco value){
         this.farmaco = value;
+    }
+
+    public Medico getMedicoPrescrittore() {
+        return medicoPrescrittore;
+    }
+
+    public void setMedicoPrescrittore(Medico medicoPrescrittore) {
+        this.medicoPrescrittore = medicoPrescrittore;
+    }
+
+    public Paziente getPaziente(){
+        return paziente;
+    }
+
+    public void setPaziente(Paziente value){
+        this.paziente = value;
     }
 }
