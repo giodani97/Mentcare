@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface VisitaRepository extends CrudRepository<Visita, Long> {
     Visita getVisitaByIdVisita(long id);
-    List<Visita> getVisitaByMedico(Medico medico);
+    List<Visita> getVisitaByMedicoOrderByDataVisita(Medico medico);
     List<Visita> getVisitaByPaziente(Paziente paziente);
 }

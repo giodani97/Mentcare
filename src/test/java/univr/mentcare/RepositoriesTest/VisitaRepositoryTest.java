@@ -69,7 +69,7 @@ public class VisitaRepositoryTest {
 
     @Test
     public void getVisitaByMedicoTest(){
-        List<Visita> visite = visitaRepository.getVisitaByMedico(medico);
+        List<Visita> visite = visitaRepository.getVisitaByMedicoOrderByDataVisita(medico);
         if(visite.size() == 1)
             assertEquals(visita.getIdVisita(), visite.get(0).getIdVisita());
     }

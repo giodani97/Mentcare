@@ -73,10 +73,10 @@ alla pagina "Lista pazienti" (/lista-pazienti) dove troverà una tabella con tut
 **Assunzione iniziale:** Un medico deve visualizzare i prossimi appuntamenti con i pazienti. Il medico deve essersi già 
 autenticato al sistema attraverso un browser e trovarsi sulla home page (/).\
 **Normalità:** Il medico deve cliccare sul link "La mia agenda" dalla home page (/). Verrà reindirizzato alla pagina 
-"La mia agenda" (/la-mia-agenda) dove sarà presente una tabella con i suoi prossimi appuntamenti. Ogni riga della tabella 
+"Agenda" (/agenda) dove sarà presente una tabella con i suoi prossimi appuntamenti. Ogni riga della tabella 
 conterrà la data e l'ora della visita, nome e cognome del paziente (sarà un link che porta alla cartella clinica del paziente) 
 accompagnato da un warning sign (&#x26A0;) se questo presenta comportamenti pericolosi.\
-**Stato del sistema a scenario completato:** Il medico è autenticato e si trova sulla pagina "La mia agenda" (/la-mia-agenda).
+**Stato del sistema a scenario completato:** Il medico è autenticato e si trova sulla pagina "Agenda" (/agenda).
 
 ### 3. Aggiornare la cartella clinica di un paziente
 **Assunzione iniziale:** Un medico deve poter aggiornare la cartella clinica di un paziente. Il medico deve essersi già 
