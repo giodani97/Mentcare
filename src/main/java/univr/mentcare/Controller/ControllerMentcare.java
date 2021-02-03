@@ -1,6 +1,7 @@
 package univr.mentcare.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +36,7 @@ public class ControllerMentcare {
     private VisitaRepository visitaRepository;
 
     @Component
+    @Profile("!test")
     private class InitRepositories {
         MedicoRepository medicoRepository;
         PazienteRepository pazienteRepository;
@@ -46,6 +48,8 @@ public class ControllerMentcare {
             this.medicoRepository.save(loggedMedico);
             this.pazienteRepository = pazienteRepository;
             Paziente paziente = new Paziente("Bianchi", "Neri", format.parse("10/10/1980"), "Valdagno", "Vicenza", "Italia", "01234567890", true, false);
+            paziente.setDiagnosi("Lorem ipsum dolor sit amet, consectetur adipisci elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua.");
+            paziente.setDataDiagnosi(Calendar.getInstance().getTime());
             Paziente paziente2 = new Paziente("Luigi", "Verdi", format.parse("21/12/1962"), "Roma", "Roma", "Italia", "3697412682", false, true);
             this.pazienteRepository.save(paziente);
             this.pazienteRepository.save(paziente2);
@@ -84,16 +88,26 @@ public class ControllerMentcare {
         return "listaPazienti";
     }
 
-    @RequestMapping("/visualizza-cartella/{pazienteID}")
+    @RequestMapping("/cartella-clinica/{pazienteID}")
     public String visualizzaCartella(@PathVariable (value = "pazienteID") long idPaziente, Model model){
         Paziente paziente = pazienteRepository.getPazienteById(idPaziente);
         if (paziente != null) {
             model.addAttribute("paziente", paziente);
             List<Visita> visitaList = new LinkedList<>();
-            for(Visita visita : visitaRepository.getVisitaByPaziente(paziente))
+            for(Visita visita : visitaRepository.getVisitaByPazienteOrderByDataVisita(paziente))
                 visitaList.add(visita);
             model.addAttribute("visite", visitaList);
-            return "visualizzaCartella";
+            return "cartella";
+        }
+        return "redirect:/";
+    }
+
+    @RequestMapping("/modifica-cartella/{pazienteID}")
+    public String modificaCartella(@PathVariable (value = "pazienteID") long idPaziente, Model model){
+        Paziente paziente = pazienteRepository.getPazienteById(idPaziente);
+        if (paziente != null){
+            model.addAttribute("paziente", paziente);
+            return "modificaCartella";
         }
         return "redirect:/";
     }

@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import univr.mentcare.Models.Farmaco;
 import univr.mentcare.Models.Medico;
@@ -24,6 +25,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@ActiveProfiles("test")
 public class PrescrizioneRepositoryTest {
 
     @Autowired
@@ -43,6 +45,7 @@ public class PrescrizioneRepositoryTest {
 
     @Before
     public void setUp() throws Exception {
+        tearDown();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date datanascita = formatter.parse("01/01/1980");
         medico = new Medico("Mario", "Rossi", "VR001");

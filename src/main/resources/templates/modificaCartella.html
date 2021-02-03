@@ -1,0 +1,120 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title th:text="'Modifica cartella ' + ${paziente.cognome} + ' ' + ${paziente.nome}"></title>
+
+    <style>
+        .form-row{
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div th:insert="/fragments/navbar :: navbar"/>
+
+
+<div class="container-fluid" style="margin-bottom: 30px">
+    <div class="col">
+        <div class="row text-center">
+            <h4 th:text="'Stai modificando la cartella di ' + ${paziente.cognome} + ' ' + ${paziente.nome}"/>
+        </div>
+        <form>
+            <div class="card mb-4 box-shadow"  style="margin-top: 30px">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Dati anagrafici</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="cognome">Cognome</label>
+                            <input type="text" class="form-control" id="cognome" th:value="${paziente.cognome}" placeholder="es: Rossi">
+                        </div>
+                        <div class="col">
+                            <label for="nome">Nome</label>
+                            <input type="text" class="form-control" id="nome" th:value="${paziente.nome}" placeholder="es: Mario">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="dataNascita">Data di nascita</label>
+                            <input type="date" class="form-control" th:value="${#dates.format(paziente.dataDiNascita, 'dd/MM/yyyy')}" id="dataNascita" placeholder="gg/mm/aaaa">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="comuneNascita">Comune di nascita</label>
+                            <input type="text" class="form-control" id="comuneNascita" th:value="${paziente.comuneNascita}" placeholder="es: Roma">
+                        </div>
+                        <div class="col">
+                            <label for="provinciaNascita">Comune di nascita</label>
+                            <input type="text" class="form-control" id="provinciaNascita" th:value="${paziente.provinciaNascita}" placeholder="es: RM">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="nazionalita">Nazionalità</label>
+                            <input type="text" class="form-control" id="nazionalita" th:value="${paziente.nazionalita}" placeholder="es: Italia">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4 box-shadow"  style="margin-top: 30px">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Diagnosi</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="diagnosi">Diagnosi</label>
+                            <textarea class="form-control" id="diagnosi" th:text="${paziente.diagnosi}" placeholder="inserisci la diagnosi del paziente"></textarea>
+                        </div>
+                    </div>
+                    <div th:if="${paziente.dataDiagnosi} != null">
+                        <p th:text="'Diagnosi effettuata il: ' + ${#dates.format(paziente.dataDiagnosi, 'dd/MM/yyyy')}"/>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="pericolosita" th:checked="${paziente.pericoloso}">
+                        <label class="form-check-label" for="pericolosita">Il paziente è pericoloso?</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="autosufficiente" th:checked="${paziente.autosufficiente}">
+                        <label class="form-check-label" for="autosufficiente">Il paziente è autosufficiente?</label>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4 box-shadow"  style="margin-top: 30px">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Contatti</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="nTelefono">Telefono</label>
+                            <input type="tel" class="form-control" id="nTelefono" th:value="${paziente.nTelefono}" placeholder="es: 01234567890"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="btn-danger btn" th:href="'/cartella-clinica/' + ${paziente.id}">Annulla</a>
+            <input type="submit" class="btn badge-info float-right" value="Salva">
+        </form>
+    </div>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

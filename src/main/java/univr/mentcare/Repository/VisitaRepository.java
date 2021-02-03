@@ -11,5 +11,5 @@ import java.util.List;
 public interface VisitaRepository extends CrudRepository<Visita, Long> {
     Visita getVisitaByIdVisita(long id);
     List<Visita> getVisitaByMedicoOrderByDataVisita(Medico medico);
-    List<Visita> getVisitaByPaziente(Paziente paziente);
+    List<Visita> getVisitaByPazienteOrderByDataVisita(Paziente paziente);
 }

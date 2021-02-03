@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import univr.mentcare.Models.Medico;
 import univr.mentcare.Repository.MedicoRepository;
@@ -17,6 +18,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@ActiveProfiles("test")
 public class MedicoRepositoryTest {
 
     @Autowired
@@ -26,6 +28,7 @@ public class MedicoRepositoryTest {
 
     @Before
     public void setUp() throws Exception {
+        tearDown();
         medico = new Medico("Mario", "Rossi", "VR001");
     }
 

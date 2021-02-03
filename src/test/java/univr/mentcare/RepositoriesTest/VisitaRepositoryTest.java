@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import univr.mentcare.Models.*;
 import univr.mentcare.Repository.*;
@@ -19,6 +20,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@ActiveProfiles("test")
 public class VisitaRepositoryTest {
 
     @Autowired
@@ -76,7 +78,7 @@ public class VisitaRepositoryTest {
 
     @Test
     public void getVisitaByPazienteTest(){
-        List<Visita> visite = visitaRepository.getVisitaByPaziente(paziente);
+        List<Visita> visite = visitaRepository.getVisitaByPazienteOrderByDataVisita(paziente);
         if(visite.size() == 1)
             assertEquals(visita.getIdVisita(), visite.get(0).getIdVisita());
     }

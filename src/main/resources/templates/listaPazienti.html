@@ -28,7 +28,7 @@
                 <td class="align-middle" scope="row" th:text="${paziente.cognome}"></td>
                 <td class="align-middle" scope="row" th:text="${paziente.nome}"></td>
                 <td class="align-middle" scope="row" th:text="(${paziente.pericoloso} ? 'SI' : 'NO')"></td>
-                <td class="align-middle" scope="row"><a th:href="'/visualizza-cartella/' + ${paziente.id}" class="btn btn-info" th:text="'Visualizza cartella di ' + ${paziente.cognome} + ' ' + ${paziente.nome}"/></td>
+                <td class="align-middle" scope="row"><a th:href="'/cartella-clinica/' + ${paziente.id}" class="btn btn-info" th:text="'Visualizza cartella di ' + ${paziente.cognome} + ' ' + ${paziente.nome}"/></td>
                 <td class="align-middle" scope="row"><a th:href="'/modifica-cartella/' + ${paziente.id}" class="btn btn-info" th:text="'Modifica cartella di ' + ${paziente.cognome} + ' ' + ${paziente.nome}"/></td>
             </tr>
             <tr>
