@@ -27,7 +27,7 @@
         <div class="row text-center">
             <h4 th:text="'Stai modificando la cartella di ' + ${paziente.cognome} + ' ' + ${paziente.nome}"/>
         </div>
-        <form>
+        <form th:action="'/salva-cartella/' + ${paziente.id}" method="POST" >
             <div class="card mb-4 box-shadow"  style="margin-top: 30px">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">Dati anagrafici</h4>
@@ -36,33 +36,33 @@
                     <div class="form-row">
                         <div class="col">
                             <label for="cognome">Cognome</label>
-                            <input type="text" class="form-control" id="cognome" th:value="${paziente.cognome}" placeholder="es: Rossi">
+                            <input type="text" class="form-control" id="cognome" name="cognome" th:value="${paziente.cognome}" placeholder="es: Rossi">
                         </div>
                         <div class="col">
                             <label for="nome">Nome</label>
-                            <input type="text" class="form-control" id="nome" th:value="${paziente.nome}" placeholder="es: Mario">
+                            <input type="text" class="form-control" id="nome" name="nome" th:value="${paziente.nome}" placeholder="es: Mario">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col">
-                            <label for="dataNascita">Data di nascita</label>
-                            <input type="date" class="form-control" th:value="${#dates.format(paziente.dataDiNascita, 'dd/MM/yyyy')}" id="dataNascita" placeholder="gg/mm/aaaa">
+                            <label for="dataNascita">Data di nascita (in formato gg/mm/aaaa)</label>
+                            <input type="text" class="form-control" th:value="${#dates.format(paziente.dataDiNascita, 'dd/MM/yyyy')}" id="dataNascita" name="dataNascita" placeholder="gg/mm/aaaa" pattern="\d{2}/\d{2}/\d{4}">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col">
                             <label for="comuneNascita">Comune di nascita</label>
-                            <input type="text" class="form-control" id="comuneNascita" th:value="${paziente.comuneNascita}" placeholder="es: Roma">
+                            <input type="text" class="form-control" id="comuneNascita" name="comuneNascita" th:value="${paziente.comuneNascita}" placeholder="es: Roma">
                         </div>
                         <div class="col">
-                            <label for="provinciaNascita">Comune di nascita</label>
-                            <input type="text" class="form-control" id="provinciaNascita" th:value="${paziente.provinciaNascita}" placeholder="es: RM">
+                            <label for="provinciaNascita">Provincia di nascita</label>
+                            <input type="text" class="form-control" id="provinciaNascita" name="provinciaNascita" th:value="${paziente.provinciaNascita}" placeholder="es: RM">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col">
                             <label for="nazionalita">Nazionalità</label>
-                            <input type="text" class="form-control" id="nazionalita" th:value="${paziente.nazionalita}" placeholder="es: Italia">
+                            <input type="text" class="form-control" id="nazionalita" name="nazionalita" th:value="${paziente.nazionalita}" placeholder="es: Italia">
                         </div>
                     </div>
                 </div>
@@ -75,19 +75,19 @@
                     <div class="form-row">
                         <div class="col">
                             <label for="diagnosi">Diagnosi</label>
-                            <textarea class="form-control" id="diagnosi" th:text="${paziente.diagnosi}" placeholder="inserisci la diagnosi del paziente"></textarea>
+                            <textarea class="form-control" id="diagnosi" name="diagnosi" th:text="${paziente.diagnosi}" placeholder="inserisci la diagnosi del paziente"></textarea>
                         </div>
                     </div>
                     <div th:if="${paziente.dataDiagnosi} != null">
                         <p th:text="'Diagnosi effettuata il: ' + ${#dates.format(paziente.dataDiagnosi, 'dd/MM/yyyy')}"/>
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="pericolosita" th:checked="${paziente.pericoloso}">
-                        <label class="form-check-label" for="pericolosita">Il paziente è pericoloso?</label>
+                        <input type="checkbox" class="form-check-input" id="pericolosita" name="pericolosita" th:checked="${paziente.pericoloso}">
+                        <label class="form-check-label" for="pericolosita">Il paziente è pericoloso</label>
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="autosufficiente" th:checked="${paziente.autosufficiente}">
-                        <label class="form-check-label" for="autosufficiente">Il paziente è autosufficiente?</label>
+                        <input type="checkbox" class="form-check-input" id="autosufficiente" name="autosufficiente" th:checked="${paziente.autosufficiente}">
+                        <label class="form-check-label" for="autosufficiente">Il paziente è autosufficiente</label>
                     </div>
                 </div>
             </div>
@@ -99,7 +99,7 @@
                     <div class="form-row">
                         <div class="col">
                             <label for="nTelefono">Telefono</label>
-                            <input type="tel" class="form-control" id="nTelefono" th:value="${paziente.nTelefono}" placeholder="es: 01234567890"/>
+                            <input type="tel" class="form-control" id="nTelefono" name="nTelefono" th:value="${paziente.nTelefono}" placeholder="es: 01234567890"/>
                         </div>
                     </div>
                 </div>
@@ -109,6 +109,7 @@
         </form>
     </div>
 </div>
+
 
 
 <!-- Optional JavaScript -->

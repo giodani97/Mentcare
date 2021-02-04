@@ -2,16 +2,18 @@ package univr.mentcare.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import univr.mentcare.Models.Medico;
-import univr.mentcare.Models.Paziente;
-import univr.mentcare.Models.Visita;
+import org.springframework.web.bind.annotation.RequestParam;
+import univr.mentcare.Models.*;
 import univr.mentcare.Repository.*;
 
+
+import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -41,7 +43,8 @@ public class ControllerMentcare {
         MedicoRepository medicoRepository;
         PazienteRepository pazienteRepository;
         VisitaRepository visitaRepository;
-        InitRepositories(MedicoRepository medicoRepository, PazienteRepository pazienteRepository, VisitaRepository visitaRepository) throws ParseException {
+        FarmacoRepository farmacoRepository;
+        InitRepositories(MedicoRepository medicoRepository, PazienteRepository pazienteRepository, VisitaRepository visitaRepository, FarmacoRepository farmacoRepository) throws ParseException {
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             loggedMedico = new Medico("Mario", "Rossi", "VR001");
             this.medicoRepository = medicoRepository;
@@ -61,6 +64,9 @@ public class ControllerMentcare {
             cal.add(Calendar.HOUR, 23);
             this.visitaRepository.save(new Visita(loggedMedico, paziente, cal.getTime()));
             this.visitaRepository.save(new Visita(loggedMedico, paziente, Calendar.getInstance().getTime()));
+            this.farmacoRepository = farmacoRepository;
+            this.farmacoRepository.save(new Farmaco("Haldol", "aloperidolo"));
+            this.farmacoRepository.save(new Farmaco("Zyprexa", "olanzapina"));
         }
     }
 
@@ -97,6 +103,10 @@ public class ControllerMentcare {
             for(Visita visita : visitaRepository.getVisitaByPazienteOrderByDataVisita(paziente))
                 visitaList.add(visita);
             model.addAttribute("visite", visitaList);
+            List<Prescrizione> listaPrescrizione = new LinkedList<>();
+            for(Prescrizione prescrizione : prescrizioneRepository.findByPazienteOrderByDataPrescrizione(paziente))
+                listaPrescrizione.add(prescrizione);
+            model.addAttribute("prescrizioni", listaPrescrizione);
             return "cartella";
         }
         return "redirect:/";
@@ -112,6 +122,84 @@ public class ControllerMentcare {
         return "redirect:/";
     }
 
+    @RequestMapping(value = "/salva-cartella/{pazienteID}")
+    public String salvaCartella(@PathVariable (value = "pazienteID") long idPaziente, @RequestParam(name = "cognome") String cognome, @RequestParam(name = "nome") String nome,
+                                @RequestParam(name = "dataNascita") Date dataNascita, @RequestParam(name = "comuneNascita") String comuneNascita,
+                                @RequestParam(name = "provinciaNascita") String provinciaNascita, @RequestParam(name = "nazionalita") String nazionalita,
+                                @RequestParam(name = "diagnosi", required = false) String diagnosi, @RequestParam(name = "pericoloso", required = false) String pericoloso,
+                                @RequestParam(name = "autosufficiente", required = false) String autosufficiente, @RequestParam(name = "nTelefono") String nTelefono){
+        Paziente paziente = pazienteRepository.getPazienteById(idPaziente);
+        if(paziente == null)
+            return "redirect:/";
+        paziente.setCognome(cognome);
+        paziente.setNome(nome);
+        paziente.setDataDiNascita(dataNascita);
+        paziente.setComuneNascita(comuneNascita);
+        paziente.setProvinciaNascita(provinciaNascita);
+        paziente.setNazionalita(nazionalita);
+        if(diagnosi.equals("")){
+            paziente.setDiagnosi(null);
+            paziente.setDataDiagnosi(null);
+        } else {
+            paziente.setDiagnosi(diagnosi);
+            paziente.setDataDiagnosi(Calendar.getInstance().getTime());
+        }
+        paziente.setPericoloso(pericoloso != null);
+        paziente.setAutosufficiente(autosufficiente != null);
+        paziente.setnTelefono(nTelefono);
+        pazienteRepository.save(paziente);
+        return "redirect:/cartella-clinica/" + paziente.getId();
+    }
 
+    @RequestMapping(value = "/nuova-prescrizione/{pazienteID}")
+    public String nuovaPrescrizione(@PathVariable (value = "pazienteID") long idPaziente, Model model){
+        Paziente paziente = pazienteRepository.getPazienteById(idPaziente);
+        if(paziente == null)
+            return "redirect:/";
+        List<Farmaco> farmaciList = new LinkedList<>();
+        for(Farmaco farmaco : farmacoRepository.findAll()){
+            farmaciList.add(farmaco);
+        }
+        model.addAttribute("farmaci", farmaciList);
+        model.addAttribute("paziente", paziente);
+        return "nuovaPrescrizione";
+    }
 
+    @RequestMapping(value = "/salva-prescrizione/{pazienteID}")
+    public String salvaPrescrizione(@PathVariable (value = "pazienteID") long idPaziente, @RequestParam(name = "farmaco") long idFarmaco, @RequestParam(name = "dosaggio") String dosaggio){
+        Paziente paziente = pazienteRepository.getPazienteById(idPaziente);
+        if(paziente == null)
+            return "redirect:/";
+        Farmaco farmaco = farmacoRepository.findById(idFarmaco);
+        if(farmaco != null)
+            prescrizioneRepository.save(new Prescrizione(farmaco, Calendar.getInstance().getTime(), dosaggio, loggedMedico, paziente));
+        return "redirect:/cartella-clinica/" + paziente.getId();
+    }
+
+    @RequestMapping(value = "/visita/{visitaID}")
+    public String visualizzaVisita(@PathVariable (value = "visitaID") long idVisita, Model model){
+        Visita visita = visitaRepository.getVisitaByIdVisita(idVisita);
+        if(visita == null)
+            return "redirect:/";
+        model.addAttribute("visita", visita);
+        return "visita";
+    }
+
+    @RequestMapping(value = "/salva-osservazioni/{visitaID}")
+    public String salvaOsservazioni(@PathVariable (value = "visitaID") long idVisita, @RequestParam(name = "osservazioni", required = false) String osservazioni){
+        Visita visita = visitaRepository.getVisitaByIdVisita(idVisita);
+        if(visita == null)
+            return "redirect:/";
+        if(osservazioni.equals(""))
+            visita.setOsservazioni(null);
+        else
+            visita.setOsservazioni(osservazioni);
+        visitaRepository.save(visita);
+        return "redirect:/cartella-clinica/" + visita.getPaziente().getId();
+    }
+
+    @RequestMapping(value = "/scarica-report/{pazienteID}")
+    public ResponseEntity<Resource> scaricaReport(){
+        return null;
+    }
 }

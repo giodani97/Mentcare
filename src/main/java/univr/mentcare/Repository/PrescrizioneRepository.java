@@ -10,5 +10,5 @@ import java.util.List;
 public interface PrescrizioneRepository extends CrudRepository<Prescrizione, Long> {
     List<Prescrizione> findByFarmaco(Farmaco farmaco);
     Prescrizione findByIdPrescrizione(long id);
-    Prescrizione findByPaziente(Paziente paziente);
+    List<Prescrizione> findByPazienteOrderByDataPrescrizione(Paziente paziente);
 }

@@ -19,7 +19,10 @@
         <div class="col">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">Dati paziente</h4>
+                    <div class="btn-toolbar justify-content-between" role="toolbar">
+                        <h4 class="my-0 font-weight-normal">Dati paziente</h4>
+                        <a class="btn btn-danger float-right" th:href="'/modifica-cartella/' + ${paziente.id}">Modifica cartella</a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
@@ -31,7 +34,6 @@
                         <li class="list-group-item" th:text="'Il paziente ' + (${paziente.pericoloso} ? 'è pericoloso' : 'non è pericoloso')"/>
                         <li class="list-group-item" th:text="'Il paziente ' + (${paziente.autosufficiente} ? 'è autosufficiente' : 'non è autosufficiente')"/>
                     </ul>
-                    <a class="btn btn-danger float-right" th:href="'/modifica-cartella/' + ${paziente.id}" style="margin-top: 20px">Modifica cartella</a>
                 </div>
             </div>
 
@@ -72,6 +74,46 @@
                     </div>
                     <div th:if="${paziente.diagnosi} == null">
                         <p>Non è neancora presenta una diagnosi, modifica la cartella del paziente per aggiungerla</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <div class="btn-toolbar justify-content-between" role="toolbar">
+                        <h4 class="my-0 font-weight-normal">Prescrizione del paziente</h4>
+                        <a th:href="'/nuova-prescrizione/' + ${paziente.id}" class="btn btn-success float-right">Nuova prescrizione</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div th:if="${prescrizioni.isEmpty()}">
+                        <p>Il paziente non ha prescrizioni</p>
+                    </div>
+                    <div th:if="!${prescrizioni.isEmpty()}">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered text-center">
+                                <tr>
+                                    <th scope="col">Data prescrizione</th>
+                                    <th scope="col">Farmaco prescritto</th>
+                                    <th scope="col">Principio attivo</th>
+                                    <th scope="col">Dosaggio</th>
+                                    <th scope="col">Prescritto da</th>
+                                </tr>
+                                <tr th:each="prescrizione: ${prescrizioni}">
+                                    <td scope="row" class="align-middle" th:text="${#dates.format(prescrizione.dataPrescrizione, 'dd/MM/yyyy')}"></td>
+                                    <td scope="row" class="align-middle" th:text="${prescrizione.farmaco.nomeCommerciale}"></td>
+                                    <td scope="row" class="align-middle" th:text="${prescrizione.farmaco.principioAttivo}"></td>
+                                    <td scope="row" class="align-middle" th:text="${prescrizione.dosaggio}"></td>
+                                    <td scope="row" class="align-middle" th:text="'Dr. ' + ${prescrizione.medicoPrescrittore.cognome} + ' ' + ${prescrizione.medicoPrescrittore.nome}"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Data prescrizione</th>
+                                    <th scope="col">Farmaco prescritto</th>
+                                    <th scope="col">Principio attivo</th>
+                                    <th scope="col">Dosaggio</th>
+                                    <th scope="col">Prescritto da</th>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
