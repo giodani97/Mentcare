@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Lista pazienti</title>
+    <title th:text="'Cartella clinica ' + ${paziente.cognome} + ' ' + ${paziente.nome}"></title>
 </head>
 <body>
 
@@ -21,7 +21,10 @@
                 <div class="card-header">
                     <div class="btn-toolbar justify-content-between" role="toolbar">
                         <h4 class="my-0 font-weight-normal">Dati paziente</h4>
-                        <a class="btn btn-danger float-right" th:href="'/modifica-cartella/' + ${paziente.id}">Modifica cartella</a>
+                        <div class="btn-toolbar float-right">
+                        <a class="btn btn-success" style="margin-right: 10px" th:href="'/scarica-report/' + ${paziente.id}">Scarica report</a>
+                        <a class="btn btn-danger" th:href="'/modifica-cartella/' + ${paziente.id}">Modifica cartella</a>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">

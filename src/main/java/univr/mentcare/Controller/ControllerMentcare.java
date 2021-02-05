@@ -1,7 +1,14 @@
 package univr.mentcare.Controller;
 
+import org.docx4j.openpackaging.exceptions.Docx4JException;
+import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -13,7 +20,7 @@ import univr.mentcare.Models.*;
 import univr.mentcare.Repository.*;
 
 
-import javax.annotation.Resource;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -68,6 +75,30 @@ public class ControllerMentcare {
             this.farmacoRepository.save(new Farmaco("Haldol", "aloperidolo"));
             this.farmacoRepository.save(new Farmaco("Zyprexa", "olanzapina"));
         }
+    }
+
+    private void creaReport(File file, Paziente paziente) throws Docx4JException, FileNotFoundException {
+        WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.createPackage();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        MainDocumentPart mdp = wordMLPackage.getMainDocumentPart();
+        mdp.addParagraphOfText("Report del paziente " + paziente.getCognome() + " " + paziente.getNome());
+        mdp.addParagraphOfText("Cognome: " + paziente.getCognome() + "\nNome: " + paziente.getNome() +
+                "\nData di nascita: " + format.format(paziente.getDataDiNascita()) + "\nNato a: " + paziente.getComuneNascita()
+                + ", " + paziente.getProvinciaNascita() + ", " + paziente.getNazionalita() + "\nIl paziente " + (paziente.isPericoloso() ? "" : "non ")
+                + "è pericoloso\nIl paziente " + (paziente.isAutosufficiente() ? "" : "non ") + "è autosufficiente");
+        mdp.addParagraphOfText("Contatti:\nNumero di telefono: " + paziente.getnTelefono());
+        mdp.addParagraphOfText("Diagnosi:\n" + (paziente.getDiagnosi() == null ? "Il paziente non è stato ancora diagnosticato" : paziente.getDiagnosi()));
+        for(Prescrizione prescrizione : prescrizioneRepository.findByPazienteOrderByDataPrescrizione(paziente)){
+            mdp.addParagraphOfText("Prescrizione:\nPrescrizione effettuata in data: " + format.format(prescrizione.getDataPrescrizione()) + "\nNome commerciale farmaco: " + prescrizione.getFarmaco().getNomeCommerciale() +
+                    "\nPrincipio attivo: " + prescrizione.getFarmaco().getPrincipioAttivo() + "\nDosaggio: " + prescrizione.getDosaggio() + "\nPrescritta dal Dr: " + prescrizione.getMedicoPrescrittore().getCognome() + " " + prescrizione.getMedicoPrescrittore().getNome());
+        }
+        for(Visita visita : visitaRepository.getVisitaByPazienteOrderByDataVisita(paziente)){
+            if(visita.getDataVisita().before(Calendar.getInstance().getTime())){
+                mdp.addParagraphOfText("Visita:\nVisita tenutasi il: " + new SimpleDateFormat("dd/MM/yyyy, HH:mm").format(visita.getDataVisita()) +
+                        "\nMedico: " + visita.getMedico().getCognome() + " " + visita.getMedico().getNome() + "\nOsservazioni: " + (visita.getOsservazioni() == null ? "Nessuna osservazione" : visita.getOsservazioni()));
+            }
+        }
+        wordMLPackage.save(file);
     }
 
     @RequestMapping("/")
@@ -199,7 +230,23 @@ public class ControllerMentcare {
     }
 
     @RequestMapping(value = "/scarica-report/{pazienteID}")
-    public ResponseEntity<Resource> scaricaReport(){
-        return null;
+    public ResponseEntity<FileSystemResource> scaricaReport(@PathVariable(value = "pazienteID") long idPaziente){
+        Paziente paziente = pazienteRepository.getPazienteById(idPaziente);
+        try {
+            File file = File.createTempFile("Report" + paziente.getCognome() + " " + paziente.getNome(), ".docx");
+            creaReport(file, paziente);
+            long fileLength = file.length(); // this is ok, but see note below
+
+            HttpHeaders respHeaders = new HttpHeaders();
+            respHeaders.setContentType(MediaType.valueOf("application/vnd.openxmlformats-officedocument.wordprocessingml.document"));
+            respHeaders.setContentLength(fileLength);
+            respHeaders.setContentDispositionFormData("attachment", "Report " + paziente.getCognome() + " " + paziente.getNome() + ".docx");
+
+            return new ResponseEntity<>(
+                    new FileSystemResource(file), respHeaders, HttpStatus.OK
+            );
+        } catch (IOException | Docx4JException e) {
+            return null;
+        }
     }
 }

@@ -20,16 +20,19 @@
             <tr>
                 <th scope="col">Data e ora visita</th>
                 <th scope="col">Paziente</th>
+                <th scope="col">Vai alla visita</th>
                 <th scope="col">Vai alla cartella del paziente</th>
             </tr>
             <tr th:each="visita: ${visite}">
                 <td scope="row" class="align-middle" th:text="${#dates.format(visita.dataVisita, 'dd/MM/yyyy HH:mm')}"></td>
                 <td scope="row" class="align-middle" th:text="${visita.paziente.cognome} + ' ' + ${visita.paziente.nome} + ' ' + (${visita.paziente.pericoloso} ? '&#x26A0' : '')"></td>
-                <td scope="row" class="align-middle"><a class="btn btn-info" th:href="'/cartella-clinica/' + ${visita.getPaziente().getId()}" th:text="'Vai alla cartella di ' + ${visita.paziente.cognome} + ' ' + ${visita.paziente.nome}"></a></td>
+                <td scope="row" class="align-middle"><a class="btn btn-success" th:href="'/visita/' + ${visita.idVisita}">Vai alla visita</a></td>
+                <td scope="row" class="align-middle"><a class="btn btn-info" th:href="'/cartella-clinica/' + ${visita.paziente.id}" th:text="'Vai alla cartella di ' + ${visita.paziente.cognome} + ' ' + ${visita.paziente.nome}"></a></td>
             </tr>
             <tr>
                 <th scope="col">Data e ora visita</th>
                 <th scope="col">Paziente</th>
+                <th scope="col">Vai alla visita</th>
                 <th scope="col">Vai alla cartella del paziente</th>
             </tr>
         </table>
