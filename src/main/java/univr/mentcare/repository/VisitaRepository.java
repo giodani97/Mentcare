@@ -1,11 +1,10 @@
-package univr.mentcare.Repository;
+package univr.mentcare.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import univr.mentcare.Models.Medico;
-import univr.mentcare.Models.Paziente;
-import univr.mentcare.Models.Visita;
+import univr.mentcare.models.Medico;
+import univr.mentcare.models.Paziente;
+import univr.mentcare.models.Visita;
 
-import java.util.Date;
 import java.util.List;
 
 public interface VisitaRepository extends CrudRepository<Visita, Long> {

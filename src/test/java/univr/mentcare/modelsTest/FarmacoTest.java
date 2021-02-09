@@ -1,8 +1,8 @@
-package univr.mentcare.ModelsTest;
+package univr.mentcare.modelsTest;
 
 import org.junit.Before;
 import org.junit.Test;
-import univr.mentcare.Models.Farmaco;
+import univr.mentcare.models.Farmaco;
 
 import static org.junit.Assert.*;
 

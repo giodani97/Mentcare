@@ -1,9 +1,9 @@
-package univr.mentcare.ModelsTest;
+package univr.mentcare.modelsTest;
 
 
 import org.junit.Before;
 import org.junit.Test;
-import univr.mentcare.Models.Paziente;
+import univr.mentcare.models.Paziente;
 
 
 import java.text.ParseException;

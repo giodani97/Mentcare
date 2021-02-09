@@ -1,10 +1,10 @@
-package univr.mentcare.ModelsTest;
+package univr.mentcare.modelsTest;
 
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import univr.mentcare.Models.Medico;
+import univr.mentcare.models.Medico;
 
 
 public class MedicoTest {

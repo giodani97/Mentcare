@@ -1,4 +1,4 @@
-package univr.mentcare.Models;
+package univr.mentcare.models;
 
 import javax.persistence.*;
 import java.util.Date;

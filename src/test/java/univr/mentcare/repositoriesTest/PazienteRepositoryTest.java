@@ -1,4 +1,4 @@
-package univr.mentcare.RepositoriesTest;
+package univr.mentcare.repositoriesTest;
 
 import org.junit.After;
 import org.junit.Before;
@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-import univr.mentcare.Models.Paziente;
-import univr.mentcare.Repository.PazienteRepository;
+import univr.mentcare.models.Paziente;
+import univr.mentcare.repository.PazienteRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

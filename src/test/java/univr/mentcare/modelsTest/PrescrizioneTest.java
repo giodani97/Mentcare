@@ -1,11 +1,11 @@
-package univr.mentcare.ModelsTest;
+package univr.mentcare.modelsTest;
 
 import org.junit.Before;
 import org.junit.Test;
-import univr.mentcare.Models.Farmaco;
-import univr.mentcare.Models.Medico;
-import univr.mentcare.Models.Paziente;
-import univr.mentcare.Models.Prescrizione;
+import univr.mentcare.models.Farmaco;
+import univr.mentcare.models.Medico;
+import univr.mentcare.models.Paziente;
+import univr.mentcare.models.Prescrizione;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

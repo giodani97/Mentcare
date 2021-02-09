@@ -1,4 +1,4 @@
-package univr.mentcare.RepositoriesTest;
+package univr.mentcare.repositoriesTest;
 
 import org.junit.After;
 import org.junit.Before;
@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-import univr.mentcare.Models.Farmaco;
-import univr.mentcare.Models.Medico;
-import univr.mentcare.Models.Paziente;
-import univr.mentcare.Models.Prescrizione;
-import univr.mentcare.Repository.FarmacoRepository;
-import univr.mentcare.Repository.MedicoRepository;
-import univr.mentcare.Repository.PazienteRepository;
-import univr.mentcare.Repository.PrescrizioneRepository;
+import univr.mentcare.models.Farmaco;
+import univr.mentcare.models.Medico;
+import univr.mentcare.models.Paziente;
+import univr.mentcare.models.Prescrizione;
+import univr.mentcare.repository.FarmacoRepository;
+import univr.mentcare.repository.MedicoRepository;
+import univr.mentcare.repository.PazienteRepository;
+import univr.mentcare.repository.PrescrizioneRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

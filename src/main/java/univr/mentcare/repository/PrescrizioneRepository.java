@@ -1,9 +1,9 @@
-package univr.mentcare.Repository;
+package univr.mentcare.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import univr.mentcare.Models.Farmaco;
-import univr.mentcare.Models.Paziente;
-import univr.mentcare.Models.Prescrizione;
+import univr.mentcare.models.Farmaco;
+import univr.mentcare.models.Paziente;
+import univr.mentcare.models.Prescrizione;
 
 import java.util.List;
 

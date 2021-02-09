@@ -1,4 +1,4 @@
-package univr.mentcare.Models;
+package univr.mentcare.models;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -24,7 +24,15 @@ public class Paziente {
 
     protected Paziente(){};
 
-    public Paziente(String cognome, String nome, Date dataDiNascita, String comuneNascita, String provinciaNascita, String nazionalita, String nTelefono, boolean pericoloso, boolean autosufficiente) {
+    public Paziente(String cognome,
+                    String nome,
+                    Date dataDiNascita,
+                    String comuneNascita,
+                    String provinciaNascita,
+                    String nazionalita,
+                    String nTelefono,
+                    boolean pericoloso,
+                    boolean autosufficiente) {
         this.cognome = cognome;
         this.nome = nome;
         this.dataDiNascita = dataDiNascita;

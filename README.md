@@ -112,6 +112,7 @@ Rossi" (/cartella-clinica/idpaziente).
 
 #
 ## Use case diagram
+### Use case del Medico
 ![Use case Medico](./readmeImages/Use%20Case%20Medico.svg)
 
 #
@@ -120,8 +121,10 @@ Rossi" (/cartella-clinica/idpaziente).
 
 #
 ## Sequence Diagram
+### Il seguente sequence diagram presenta la sequenza per aggiungere una prescrizione ad un paziente
 ![Sequence Diagram](./readmeImages/SequenceDiagram.svg)
 
 #
-##
+## Activity Diagram
+### Il seguente activity diagram presenta il flusso delle azioni per modificare la cartella di un paziente
 ![Activity Diagram](./readmeImages/ActivityDiagram.svg)
