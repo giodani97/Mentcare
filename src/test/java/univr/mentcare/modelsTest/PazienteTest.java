@@ -68,10 +68,9 @@ public class PazienteTest {
 
     @Test
     public void setDataDiNascitaTest() {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        paziente.setDataDiNascita(Calendar.getInstance().getTime());
-        Date datanascita = paziente.getDataDiNascita();
-        assertEquals(format.format(Calendar.getInstance().getTime()), format.format(datanascita));
+        Date newDate = Calendar.getInstance().getTime();
+        paziente.setDataDiNascita(newDate);
+        assertEquals(newDate, paziente.getDataDiNascita());
     }
 
     @Test
@@ -136,8 +135,9 @@ public class PazienteTest {
 
     @Test
     public void setDataDiagnosiTest() {
-        paziente.setDataDiagnosi(Calendar.getInstance().getTime());
-        assertEquals(Calendar.getInstance().getTime(), paziente.getDataDiagnosi());
+        Date newDate = Calendar.getInstance().getTime();
+        paziente.setDataDiagnosi(newDate);
+        assertEquals(newDate, paziente.getDataDiagnosi());
     }
 
     @Test

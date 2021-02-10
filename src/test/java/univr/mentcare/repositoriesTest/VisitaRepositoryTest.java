@@ -5,11 +5,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import univr.mentcare.models.*;
-import univr.mentcare.repository.*;
+import univr.mentcare.repositories.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -18,9 +20,8 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@ActiveProfiles("test")
+@RunWith(SpringJUnit4ClassRunner.class)
+@DataJpaTest
 public class VisitaRepositoryTest {
 
     @Autowired

@@ -42,6 +42,7 @@
             <div class="card-body">
                 <form th:action="'/salva-osservazioni/' + ${visita.idVisita}" method="post">
                     <textarea class="form-control" id="osservazioni" name="osservazioni" th:text="${visita.osservazioni}" placeholder="inserisci un'osservazione" style="margin-bottom: 10px"></textarea>
+                    <a class="btn btn-danger" th:href="'/cartella-clinica/' + ${visita.paziente.id}">Indietro</a>
                     <input type="submit" value="Salva osservazioni" class="btn btn-success float-right">
                 </form>
             </div>

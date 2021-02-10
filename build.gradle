@@ -42,11 +42,12 @@ jacocoTestReport {
     dependsOn test
 }
 
+
 jacocoTestReport {
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
-                    'univr/mentcare/Controller/**',
+                    'univr/mentcare/controller/**',
                     'univr/mentcare/MentcareApplication.class'
             ])
         }))

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import univr.mentcare.models.*;
-import univr.mentcare.repository.*;
+import univr.mentcare.repositories.*;
 
 
 import java.io.*;
@@ -49,12 +49,9 @@ public class ControllerMentcare {
     private VisitaRepository visitaRepository;
 
     /*
-    La seguente classe interna viene eseguita da Spring Boot una volta avviata l'applicazione.
-    L'annotazione Profile("!test") viene utilizzata per evitare che la classe venga eseguita insieme all'esecuzione
-    dei test dei repository.
+    La seguente classe interna viene eseguita da Spring Boot una volta avviata l'applicazione per inizializzare le repository con degli esempi.
      */
     @Component
-    @Profile("!test")
     private class InitRepositories {
         InitRepositories(MedicoRepository medicoRepository, PazienteRepository pazienteRepository, VisitaRepository visitaRepository, FarmacoRepository farmacoRepository) throws ParseException {
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -127,7 +124,8 @@ public class ControllerMentcare {
     public String agenda(Model model){
         List<Visita> visitaList = new LinkedList<>();
         for(Visita visita : visitaRepository.getVisitaByMedicoOrderByDataVisita(loggedMedico))
-            visitaList.add(visita);
+            if(visita.getDataVisita().after(Calendar.getInstance().getTime()))
+                visitaList.add(visita);
         model.addAttribute("visite", visitaList);
         return "agenda";
     }

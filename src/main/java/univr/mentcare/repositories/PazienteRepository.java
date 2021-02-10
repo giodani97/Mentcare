@@ -1,4 +1,4 @@
-package univr.mentcare.repository;
+package univr.mentcare.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 import univr.mentcare.models.Paziente;

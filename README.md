@@ -2,7 +2,7 @@
 ## Studente: Danieli Giovanni - VR463656
 
 
-![Logo of Mentcare](./readmeImages/logo_small.png)
+![Logo di Mentcare](./readmeImages/logo_small.png)
 
 #
 ## Sommario
@@ -12,7 +12,9 @@
 [4. Use case diagram](#use-case-diagram)\
 [5. Class diagram](#class-diagram)\
 [6. Sequence diagram](#sequence-diagram)\
-[7. Activity diagram](#activity-diagram)
+[7. Activity diagram](#activity-diagram)\
+[8. Test](#test)\
+[9. Scelte progettuali](#scelte-progettuali)
 
 #
 ## Requisiti
@@ -56,11 +58,6 @@ Gli utenti del sistema si dividono in due gruppi:
     - Addetti amministrativi, possono accedere ai report amministrativi, aggiungere pazienti al sistema con le relative pratiche.
     
 
-## Modulo scelto
-
-Come richiesto dal Professore verrà sviluppato un singolo componente del progetto Mentcare, ovvero verrà sviluppato il 
-modulo riguardo al medico.
-
 ## Scenari 
 ### 1. Visualizzare la lista dei pazienti
 **Assunzione iniziale:** Un medico deve visualizzare la lista dei pazienti in cura. Il medico deve essersi già 
@@ -83,32 +80,69 @@ accompagnato da un warning sign (&#x26A0;) se questo presenta comportamenti peri
 autenticato al sistema attraverso un browser e trovarsi sulla home page (/).\
 **Normalità:** Il medico deve cliccare sul link "Visualizza la lista dei pazienti" dalla home page (/). Verrà reindirizzato 
 alla pagina "Lista pazienti" (/lista-pazienti) dove troverà una tabella con tutti i pazienti in cura presso il sistema di 
-cliniche. Una volta individuato il paziente la cui cartella clinica è da modificare, scorrendo sulla riga vedrà due bottoni: 
-uno Blu con la scritta ("Visualizza cartella") e uno rosso con la scritta ("Modifica cartella"). 
-Una volta cliccato su quest'ultimo verranno portati alla pagina "Modifica cartella clinica Mario Rossi" (/modifica-cartella/idpaziente)
-(Mario Rossi viene utilizzato come esempio). Qui potrà modificare i vari campi disponibili. Una volta completate le modifiche
+cliniche. Una volta individuato il paziente la cui cartella clinica è da modificare, sulla stessa riga troverà due bottoni: 
+uno con la scritta ("Visualizza cartella di Luigi Verdi") e uno con la scritta ("Modifica cartella di Luigi Verdi"). 
+Una volta cliccato su quest'ultimo verranno portati alla pagina "Modifica cartella clinica Luigi Verdi" (/modifica-cartella/idpaziente)
+(Luigi Verdi viene utilizzato come esempio). Qui potrà modificare i vari campi disponibili. Una volta completate le modifiche
 troverà due bottoni: "Salva modifiche" oppure "Annulla".
-Il primo salverà le modifiche alla cartella clinica e reindirizzerà il medico alla pagina "Lista pazienti" (/lista-pazienti).
-Il secondo invece ignorerà le modifiche e reindirizzerà il medico alla pagina "Lista pazienti" (/lista-pazienti).\
+Il primo salverà le modifiche alla cartella clinica e reindirizzerà il medico alla cartella clinica del paziente (/cartella-clinica/idpaziente).
+Il secondo invece ignorerà le modifiche e reindirizzerà il medico alla cartella clinica del paziente (/cartella-clinica/idpaziente).\
+**Flusso alternativo:** Il medico deve cliccare sul link "Visualizza la lista dei pazienti" dalla home page (/). Verrà reindirizzato
+alla pagina "Lista pazienti" (/lista-pazienti) dove troverà una tabella con tutti i pazienti in cura presso il sistema di
+cliniche. Una volta individuato il paziente la cui cartella clinica è da modificare, sulla stessa riga troverà due bottoni:
+uno con la scritta ("Visualizza cartella di Luigi Verdi") e uno con la scritta ("Modifica cartella di Luigi Verdi").
+Una volta cliccato sul primo verrà portato alla pagina Cartella clinica Luigi Verdi" (/cartella-clinica/idpaziente)
+(Luigi Verdi viene utilizzato come esempio), dopodiché dovrà cliccare su "Modifica cartella" e arriverà alla pagina "Modifica cartella clinica Luigi Verdi".
+Qui potrà modificare i vari campi disponibili. Una volta completate le modifiche
+troverà due bottoni: "Salva modifiche" oppure "Annulla".
+Il primo salverà le modifiche alla cartella clinica e reindirizzerà il medico alla cartella clinica del paziente (/cartella-clinica/idpaziente).
+Il secondo invece ignorerà le modifiche e reindirizzerà il medico alla cartella clinica del paziente (/cartella-clinica/idpaziente).\
 **Stato del sistema a scenario completato:** Il medico è autenticato e si trova sulla pagina "Lista pazienti" (/lista-pazienti).
 
 ### 4. Prescrivere un farmaco
-**Assunzione iniziale:** Un medico deve prescrivere un farmaco ad un paziente. Il medico deve essersi già autenticato al
+**Assunzione iniziale:** Un medico deve prescrivere un farmaco ad un paziente, "Luigi Verdi" in questo scenario. Il medico deve essersi già autenticato al
 sistema attraverso un browser e trovarsi sulla home page (/).\
 **Normalità:** Il medico deve cliccare sul link "Visualizza la lista dei pazienti" dalla home page (/). Verrà reindirizzato
 alla pagina "Lista pazienti" (/lista-pazienti) dove troverà una tabella con tutti i pazienti in cura presso il sistema di 
-cliniche.Una volta individuato il paziente la cui cartella clinica è da modificare, scorrendo sulla riga vedrà due bottoni: 
-uno Blu con la scritta ("Visualizza cartella") e uno rosso con la scritta ("Modifica cartella").
-Una volta cliccato sul primo verranno portati alla pagina "Cartella clinica di Mario Rossi" (/cartella-clinica/idpaziente) 
-(Mario Rossi viene utilizzato come esempio) dove il medico visualizzerà la cartella clinica del paziente selezionato. 
-Oltre alla cartella clinica ci saranno due bottoni: "Nuova visita" e "Nuova prescrizione". Cliccato il pulsante "Nuova prescrizione",
-il medico verrà portato alla pagina "Nuova prescrizione" (/nuova-prescrizione/idpaziente) dove compilerà un form per una nuova prescrizione. 
-Una volta compilato il form potrà salvare la prescrizione cliccando su "Inserisci" oppure annullarla cliccando su "Annulla".
-In entrambi i casi verrà reindirizzato alla cartella clinica del paziente.
-**Stato del sistema a scenario completato:** Il medico è autenticato e si trova sulla pagina "Cartella clinica di Mario 
-Rossi" (/cartella-clinica/idpaziente).
+cliniche.Una volta individuato il paziente la cui cartella clinica è da modificare, sulla riga troverà due bottoni: 
+uno con la scritta ("Visualizza cartella di Luigi Verdi") e uno con la scritta ("Modifica cartella di Luigi Verdi").
+Una volta cliccato sul primo verranno portati alla pagina "Cartella clinica di Luigi Verdi" (/cartella-clinica/idpaziente) 
+dove il medico visualizzerà la cartella clinica del paziente selezionato. 
+All'interno di questa pagina cliccherà sul pulsante "Nuova prescrizione". Il medico verrà portato alla pagina "Nuova prescrizione"
+(/nuova-prescrizione/idpaziente) dove compilerà un form per inserire una nuova prescrizione. 
+Una volta compilato potrà salvare la prescrizione cliccando su "Inserisci" oppure annullarla cliccando su "Annulla".
+In entrambi i casi verrà reindirizzato alla cartella clinica del paziente.\
+**Stato del sistema a scenario completato:** Il medico è autenticato e si trova sulla pagina "Cartella clinica di Luigi 
+Verdi" (/cartella-clinica/idpaziente).
 
-### 5. Inserire una visita
+### 5. Inserire osservazioni ad una visita
+**Assunzione iniziale:** Un medico deve inserire le proprie osservazioni ad una visita con un paziente, "Luigi Verdi" in
+questo scenario. Il medico deve essersi già autenticato al sistema attraverso un browser e trovarsi sulla home page (/).\
+**Normalità:** Il medico deve cliccare sul link "Visualizza la lista dei pazienti" dalla home page (/). Verrà reindirizzato
+alla pagina "Lista pazienti" (/lista-pazienti) dove troverà una tabella con tutti i pazienti in cura presso il sistema di
+cliniche.Una volta individuato il paziente la cui cartella clinica è da modificare, sulla riga troverà due bottoni:
+uno con la scritta ("Visualizza cartella di Luigi Verdi") e uno con la scritta ("Modifica cartella di Luigi Verdi").
+Una volta cliccato sul primo verranno portati alla pagina "Cartella clinica di Luigi Verdi" (/cartella-clinica/idpaziente)
+dove il medico visualizzerà la cartella clinica del paziente selezionato. All'interno di questa pagina sarà presente una
+tabella con tutte le visite del paziente (passate e future), una per riga. Ogni riga contiene la data della visita e un 
+bottone "Vai". Individuata la visita ove inserire l'osservazione e cliccato il relativo bottone, il medico visualizzerà
+una pagina con i dettagli della visita e un form con un'area di testo per aggiungere o modificare l'osservazione. Una volta 
+inserita l'osservazione può salvarla cliccando sul bottone "Salva osservazioni" oppure cliccare "Indietro". In entrambi i
+casi reindirizzeranno il medico alla cartella del paziente.
+**Stato del sistema a scenario completato:** Il medico è autenticato e si trova sulla pagina "Cartella clinica di Luigi Verdi" (/cartella-clinica/idpaziente).
+
+### 6. Scaricare il report di un paziente
+**Assunzione iniziale:** Un medico deve poter scaricare il report di un paziente, "Luigi Verdi" in questo scenario. 
+Il medico deve essersi già autenticato al sistema attraverso un browser e trovarsi sulla home page (/).\
+**Normalità:** Il medico deve cliccare sul link "Visualizza la lista dei pazienti" dalla home page (/). Verrà reindirizzato
+alla pagina "Lista pazienti" (/lista-pazienti) dove troverà una tabella con tutti i pazienti in cura presso il sistema di
+cliniche.Una volta individuato il paziente la cui cartella clinica è da modificare, sulla riga troverà due bottoni:
+uno con la scritta ("Visualizza cartella di Luigi Verdi") e uno con la scritta ("Modifica cartella di Luigi Verdi").
+Una volta cliccato sul primo verranno portati alla pagina "Cartella clinica di Luigi Verdi" (/cartella-clinica/idpaziente)
+dove il medico visualizzerà la cartella clinica del paziente selezionato. Cliccato il bottone "Scarica report" verrà generato
+il file report in formato .docx e servito al medico.
+**Stato del sistema a scenario completato:** Il medico è autenticato e si trova sulla pagina "Cartella clinica di Luigi
+Verdi" (/cartella-clinica/idpaziente).
 
 #
 ## Use case diagram
@@ -128,3 +162,26 @@ Rossi" (/cartella-clinica/idpaziente).
 ## Activity Diagram
 ### Il seguente activity diagram presenta il flusso delle azioni per modificare la cartella di un paziente
 ![Activity Diagram](./readmeImages/ActivityDiagram.svg)
+
+# Test
+## Unit test
+Per ogni classe contenuta nei package models e repositories è stata creata una corrispondente classe di test. Ogni classe
+contiene abbastanza test da raggiungere una elevata copertura del codice. Non sono stati realizzati Unit Test per il controller
+in quanto 
+## Acceptance test
+È stato sviluppato un progetto gradle separato contente una classe di test "AppTest" che utilizza JWebUnit come framework.
+Questa classe contiene 6 acceptance test, uno per ogni scenario descritto in questo .
+
+# Scelte progettuali
+## Modulo sviluppato
+Come richiesto è stato sviluppato un singolo modulo del progetto MentCare, ovvero quello relativo al medico.
+
+## Implementazione del sistema
+Per implementare il sistema è stato usato il pattern Spring-MVC, scelto poichè soddisfa le richieste di avere un database
+centralizzato e di poter accedere al sistema da vari dispositivi e da vari luoghi.
+
+## Strumenti utilizzati
+Su richiesta è stato utilizzato Java come linguaggio di programmazione, Gradle come Build Environment e il linguaggio UML
+per modellare il sistema. Come framework web è stato usato Spring Boot, come template engine Thymeleaf e SpringBoot per 
+modellare velocemente le pagine web. Come IDE è stato utilizzato Intellij Idea, come VCS git con un repository remoto su
+Github. Per gli Unit test Junit 4, per gli Acceptance test JWebUnit e per il coverage e la creazione di report JaCoCo.
