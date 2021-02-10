@@ -185,4 +185,4 @@ centralizzato e di poter accedere al sistema da vari dispositivi e da vari luogh
 Su richiesta è stato utilizzato Java come linguaggio di programmazione, Gradle come Build Environment e il linguaggio UML
 per modellare il sistema. Come framework web è stato usato Spring Boot, come template engine Thymeleaf e SpringBoot per
 modellare velocemente le pagine web. Come IDE è stato utilizzato Intellij Idea, come VCS git con un repository remoto su
-Github. Per gli Unit test Junit 4, per gli Acceptance test JWebUnit e per il coverage e la creazione di report JaCoCo.
+Github. Per gli Unit test Junit 4, per gli Acceptance test JWebUnit e per il coverage JaCoCo.
